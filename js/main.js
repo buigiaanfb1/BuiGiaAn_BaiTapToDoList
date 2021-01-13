@@ -12,6 +12,9 @@ getEle("addItem").addEventListener("click", function () {
   var input = getEle("newTask").value;
 
   isValid &= validation.checkBlank(input, "notiInput", "(*) Can not be blank");
+
+  if (!isValid) return;
+
   isValid &= validation.duplicated(
     input,
     "notiInput",
@@ -22,8 +25,10 @@ getEle("addItem").addEventListener("click", function () {
   if (!isValid) return;
   var task = new Task(input);
   list.addTask(task);
+  alert("Successfully added!");
   createTable(list.arr);
   setLocalStorage();
+  input.value = "";
 });
 
 function deleteTask(id) {
